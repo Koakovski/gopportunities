@@ -1,8 +1,7 @@
 package router
 
 import (
-	"net/http"
-
+	"github.com/Koakovski/gopportunities/handler"
 	"github.com/gin-gonic/gin"
 )
 
@@ -11,34 +10,14 @@ func initializeRoutes(router *gin.Engine) {
 
 	{
 		// GET ALL OPENINGS
-		v1RouterGroup.GET("/opening", func(ctx *gin.Context) {
-			ctx.JSON(http.StatusOK, gin.H{
-				"msg": "GET Openings",
-			})
-		})
+		v1RouterGroup.GET("/opening", handler.OpeningGetAllHandler)
 		// GET OPENING BY ID
-		v1RouterGroup.GET("/opening/:id", func(ctx *gin.Context) {
-			ctx.JSON(http.StatusOK, gin.H{
-				"msg": "GET Opening",
-			})
-		})
+		v1RouterGroup.GET("/opening/:openingId", handler.OpeningGetOneHandler)
 		// CREATE NEW OPENING
-		v1RouterGroup.POST("/opening", func(ctx *gin.Context) {
-			ctx.JSON(http.StatusOK, gin.H{
-				"msg": "POST Opening",
-			})
-		})
+		v1RouterGroup.POST("/opening", handler.OpeningCreateHandler)
 		// UPDATE OPENING
-		v1RouterGroup.PUT("/opening/:id", func(ctx *gin.Context) {
-			ctx.JSON(http.StatusOK, gin.H{
-				"msg": "PUT Opening",
-			})
-		})
+		v1RouterGroup.PUT("/opening/:openingId", handler.OpeningUpdateHandler)
 		// DELETE OPENING
-		v1RouterGroup.DELETE("/opening/:id", func(ctx *gin.Context) {
-			ctx.JSON(http.StatusOK, gin.H{
-				"msg": "DELETE Opening",
-			})
-		})
+		v1RouterGroup.DELETE("/opening/:openingId", handler.OpeningDeleteHandler)
 	}
 }
