@@ -6,12 +6,10 @@ import (
 )
 
 var (
-	logger *config.Logger
+	logger *config.Logger = config.GetLogger()
 )
 
 func main() {
-	logger := config.GetLogger()
-
 	// Initialize configurations
 	if err := config.Init(); err != nil {
 		logger.Errf("config initialization error: %v", err)
