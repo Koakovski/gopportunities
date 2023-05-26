@@ -32,7 +32,7 @@ func InitializeDatabase() (*gorm.DB, error) {
 	}
 
 	// Migrate the Schemas
-	if err := db.AutoMigrate(&schema.OpeningSchema{}); err != nil {
+	if err := db.AutoMigrate(&schema.Opening{}); err != nil {
 		logger.Errorf("database migration error: %v", err)
 		return nil, err
 	}
