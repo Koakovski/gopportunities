@@ -11,7 +11,7 @@ import (
 
 // Database file info
 var (
-	databaseFolder   = ".db"
+	databaseFolder   = "./db"
 	databaseFilename = "main.db"
 	databasePath     = fmt.Sprintf("%s/%s", databaseFolder, databaseFilename)
 )
@@ -19,8 +19,8 @@ var (
 func InitializeDatabase() (*gorm.DB, error) {
 	logger := GetLogger()
 
-	// Create database file and directory if no exists
-	if err := handleDatabaseFileCreation(); err != nil {
+	// Create database file and directory if no existis
+	if err := handleDatabaseFileCreation(logger); err != nil {
 		return nil, err
 	}
 
@@ -40,25 +40,27 @@ func InitializeDatabase() (*gorm.DB, error) {
 	return db, nil
 }
 
-func handleDatabaseFileCreation() error {
+func handleDatabaseFileCreation(logger *Logger) error {
 	// Check if database file exists
-	if _, err := os.Stat(databasePath); err == nil {
-		if os.IsNotExist(err) {
-			logger.Info("database file not found, creating...")
-			// Create database file and directory
-			if err := os.MkdirAll(databaseFolder, os.ModePerm); err != nil {
-				logger.Errorf("database folder creation error: %v", err)
-				return err
-			}
+	_, err := os.Stat(databasePath)
 
-			file, err := os.Create(databasePath)
-			if err != nil {
-				logger.Errorf("database file creation error: %v", err)
-				return err
-			}
+	fmt.Println(err)
 
-			file.Close()
+	if os.IsNotExist(err) {
+		logger.Info("database file not found, creating...")
+		// Create database file and directory
+		if err := os.MkdirAll(databaseFolder, os.ModePerm); err != nil {
+			logger.Errorf("database folder creation error: %v", err)
+			return err
 		}
+
+		file, err := os.Create(databasePath)
+		if err != nil {
+			logger.Errorf("database file creation error: %v", err)
+			return err
+		}
+
+		file.Close()
 	}
 
 	return nil
