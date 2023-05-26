@@ -28,6 +28,6 @@ func GetDatabase() *gorm.DB {
 
 func GetLogger() *Logger {
 	// Initialize Logger
-	logger := NewLogger()
+	logger = newLogger()
 	return logger
 }
