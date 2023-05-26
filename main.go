@@ -12,7 +12,7 @@ var (
 func main() {
 	// Initialize configurations
 	if err := config.Init(); err != nil {
-		logger.Errf("config initialization error: %v", err)
+		logger.Errorf("config initialization error: %v", err)
 		return
 	}
 

@@ -41,7 +41,7 @@ func (l *Logger) Warning(v ...any) {
 	l.warning.Println(v...)
 }
 
-func (l *Logger) Err(v ...any) {
+func (l *Logger) Error(v ...any) {
 	l.err.Println(v...)
 }
 
@@ -58,6 +58,6 @@ func (l *Logger) WarningF(text string, v ...any) {
 	l.warning.Printf(text, v...)
 }
 
-func (l *Logger) Errf(text string, v ...any) {
+func (l *Logger) Errorf(text string, v ...any) {
 	l.err.Printf(text, v...)
 }
