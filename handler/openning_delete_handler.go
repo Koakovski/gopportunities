@@ -8,6 +8,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @BasePath  /api/v1
+// @Summary Delete opening
+// @Description Delete a job Opening
+// @Tags Openings
+// @Accept json
+// @Produce json
+// @Param openingId path int true "Opening ID"
+// @Success 204
+// @Failure 404 {object} ErrorResponse
+// @Router /opening/{openingId} [delete]
 func OpeningDeleteHandler(ctx *gin.Context) {
 	openingId := ctx.Param("openingId")
 
